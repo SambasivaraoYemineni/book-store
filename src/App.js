@@ -8,7 +8,7 @@ function App() {
   }, []);
   const fetchBooks = async (query) => {
     try {
-      const response = `await fetch(https://www.googleapis.com/books/v1/volumes?q=Sherlock+Holmes=${query});`
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=Sherlock+Holmes=${query}`);
       const data = await response.json();
       setBooks(data.items || []);
     } catch (error) {
@@ -23,17 +23,17 @@ function App() {
     }
   };
   return (
-    <div className="Bookstore">
+    <div className="Container">
       <header>
         <h1>My Bookstore</h1>
-        <div className="search-bar">
+        <div className="container1">
           <input type="text" placeholder="Search for books..."  value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           <button onClick={handleSearch}>Search</button>
         </div>
       </header>
       <main>
         {books.map((book) => (
-          <div key={book.id} className="book-card">
+          <div key={book.id} className="container2">
             {book.volumeInfo.imageLinks && (
               <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
             )}
